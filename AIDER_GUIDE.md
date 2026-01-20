@@ -2,18 +2,99 @@
 
 Aider là một công cụ lập trình cặp với AI ngay trong terminal của bạn. Nó cho phép bạn yêu cầu thay đổi code, tạo file mới, hoặc sửa lỗi bằng cách trò chuyện với một mô hình ngôn ngữ lớn (LLM) như GPT-3.5/GPT-4. Aider sẽ áp dụng các thay đổi đó trực tiếp vào file của bạn.
 
-## Cài đặt
+## Cài đặt và Thiết lập
 
-Để cài đặt Aider, bạn có thể sử dụng pip:
+Đây là hướng dẫn cài đặt và thiết lập Aider để bắt đầu sử dụng.
+
+### Cách cài đặt được khuyến nghị: `aider-install`
+
+Phương pháp đơn giản và an toàn nhất là sử dụng `aider-install`. Nó sẽ tự động cài đặt Aider và các phụ thuộc vào một môi trường Python riêng, đảm bảo không ảnh hưởng đến hệ thống của bạn.
 
 ```bash
-pip install aider-chat
+# Yêu cầu Python 3.8-3.13 đã được cài đặt
+python -m pip install aider-install
+aider-install
 ```
 
-Bạn cũng cần phải có một API key từ OpenAI và thiết lập nó trong môi trường của bạn:
+### Cài đặt bằng một dòng lệnh (Mac, Linux & Windows)
+
+Các lệnh này sẽ tự động tải về và cài đặt Aider, bao gồm cả Python 3.12 nếu cần.
+
+**Mac & Linux:**
+
+Sử dụng `curl`:
+```bash
+curl -LsSf https://aider.chat/install.sh | sh
+```
+Hoặc `wget`:
+```bash
+wget -qO- https://aider.chat/install.sh | sh
+```
+
+**Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://aider.chat/install.ps1 | iex"
+```
+
+### Các phương pháp cài đặt khác
+
+Nếu bạn muốn quản lý môi trường một cách thủ công hơn, bạn có thể sử dụng các công cụ sau:
+
+**Sử dụng `uv`:**
+```bash
+# Cài đặt uv nếu bạn chưa có
+python -m pip install uv
+# Cài đặt aider bằng uv
+uv tool install --force --python python3.12 --with pip aider-chat@latest
+```
+
+**Sử dụng `pipx`:**
+```bash
+# Cài đặt pipx nếu bạn chưa có
+python -m pip install pipx
+# Cài đặt aider bằng pipx
+pipx install aider-chat
+```
+
+**Sử dụng `pip` trong môi trường ảo:**
+
+Luôn sử dụng môi trường ảo để tránh xung đột thư viện.
 
 ```bash
-export OPENAI_API_KEY="your-api-key-here"
+# 1. Tạo môi trường ảo
+python3 -m venv aider-env
+
+# 2. Kích hoạt môi trường
+#    Trên Mac/Linux: source aider-env/bin/activate
+#    Trên Windows:   aider-env\Scripts\activate
+
+# 3. Cài đặt Aider
+python -m pip install -U --upgrade-strategy only-if-needed aider-chat
+```
+
+### Thiết lập API Key
+
+Sau khi cài đặt, bạn cần cung cấp API key.
+
+**Cách 1: Thiết lập biến môi trường (ví dụ cho OpenAI)**
+
+```bash
+export OPENAI_API_KEY="your-openai-api-key-here"
+```
+
+**Cách 2: Cung cấp trực tiếp khi chạy Aider (khuyến nghị)**
+
+Cách này linh hoạt hơn khi bạn sử dụng nhiều mô hình khác nhau.
+
+```bash
+# Ví dụ với DeepSeek
+aider --model deepseek --api-key deepseek=<key>
+
+# Ví dụ với Claude 3.7 Sonnet
+aider --model sonnet --api-key anthropic=<key>
+
+# Ví dụ với OpenAI (o3-mini)
+aider --model o3-mini --api-key openai=<key>
 ```
 
 ## Cách sử dụng
