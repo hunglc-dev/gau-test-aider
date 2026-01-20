@@ -14,3 +14,4 @@ git remote add origin https://github.com/hunglc-dev/gau-test-aider.git
 git branch -M main
 git push -u origin main
 hello
+hello 1
