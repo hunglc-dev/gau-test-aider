@@ -129,32 +129,35 @@ Aider sẽ đề xuất các khối code để thay đổi. Bạn sẽ có lựa
 
 ### Các lệnh trong Aider
 
-Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`).
+Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`). Dưới đây là danh sách đầy đủ hơn, được nhóm theo chức năng:
 
--   **/add `<file_path>`**: Thêm một hoặc nhiều tệp vào cuộc trò chuyện.
-    *   Ví dụ: `/add src/component.js`
-    *   Bạn có thể dùng glob pattern: `/add src/**/*.js`
-
+**Quản lý Tệp**
+-   **/add `<file_path>`**: Thêm một hoặc nhiều tệp vào cuộc trò chuyện. Bạn có thể dùng `glob pattern` (ví dụ: `src/**/*.js`).
 -   **/drop `<file_path>`**: Xóa một hoặc nhiều tệp khỏi cuộc trò chuyện.
-    *   Ví dụ: `/drop tests/test_old.py`
-
 -   **/ls**: Liệt kê tất cả các tệp hiện đang có trong cuộc trò chuyện.
-    *   **/ls -l**: Liệt kê các tệp cùng với thông tin về số lượng token.
+    *   `/ls -l`: Liệt kê các tệp cùng với thông tin về số lượng token.
 
+**Git và Quản lý Thay đổi**
 -   **/diff**: Hiển thị các thay đổi đang chờ xử lý (chưa được commit) trong các tệp đã thêm vào cuộc trò chuyện.
-
 -   **/undo**: Hoàn tác lại thay đổi gần nhất đã được chấp nhận.
-
--   **/commit**: Commit các thay đổi đang chờ xử lý với một thông điệp commit.
-    *   Ví dụ: `/commit -m "feat: Thêm tính năng đăng nhập"`
-    *   Aider sẽ yêu cầu bạn nhập thông điệp nếu bạn không cung cấp qua cờ `-m`.
-
--   **/run `<command>`**: Chạy một lệnh shell và đưa kết quả vào cuộc trò chuyện. Điều này rất hữu ích để chạy test hoặc linter.
-    *   Ví dụ: `/run pytest tests/`
-    *   Ví dụ: `/run npm run build`
-
+-   **/commit**: Commit các thay đổi đang chờ xử lý với một thông điệp commit (ví dụ: `/commit -m "feat: Mô tả thay đổi"`).
 -   **/git**: Hiển thị trạng thái git của các tệp trong cuộc trò chuyện. Tương tự `/diff`.
 
+**Thực thi Lệnh**
+-   **/run `<command>`**: Chạy một lệnh shell và đưa kết quả vào cuộc trò chuyện. Rất hữu ích để chạy test, linter, hoặc build.
+    *   Ví dụ: `/run pytest tests/`
+    *   Ví dụ: `/run npm run build`
+-   **/test `<command>`**: Một alias (tên gọi khác) cho `/run`, được thiết kế để chạy các lệnh test một cách tường minh hơn.
+
+**Quản lý Cuộc trò chuyện**
+-   **/clear**: Xóa toàn bộ lịch sử cuộc trò chuyện hiện tại.
+-   **/history**: Hiển thị lịch sử cuộc trò chuyện.
+-   **/save <filename>`**: Lưu nội dung cuộc trò chuyện vào một tệp văn bản.
+-   **/model [model_name]**: Hiển thị mô hình AI đang sử dụng. Nếu cung cấp `model_name`, nó sẽ chuyển sang mô hình đó.
+-   **/tokens**: Hiển thị số lượng token đã sử dụng cho các tệp trong ngữ cảnh và lịch sử trò chuyện.
+
+**Các lệnh khác**
+-   **/help**: Hiển thị danh sách các lệnh có sẵn.
 -   **/quit** hoặc **/exit**: Thoát khỏi Aider.
 
 ### Mẹo và thực hành tốt nhất
