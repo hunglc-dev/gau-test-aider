@@ -129,46 +129,64 @@ Aider sẽ đề xuất các khối code để thay đổi. Bạn sẽ có lựa
 
 ### Các lệnh trong Aider
 
-Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`). Dưới đây là danh sách đầy đủ, được nhóm theo chức năng:
+Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`). Dưới đây là danh sách đầy đủ, được nhóm theo chức năng, kèm theo ví dụ cụ thể.
 
 **Quản lý Tệp và Ngữ cảnh**
 -   **/add `<file_path>`**: Thêm một hoặc nhiều tệp vào cuộc trò chuyện. Hỗ trợ `glob pattern`.
+    *   *Ví dụ:* `/add src/components/Button.js`
+    *   *Ví dụ:* `/add src/**/*.css`
 -   **/drop `<file_path>`**: Xóa một hoặc nhiều tệp khỏi cuộc trò chuyện.
--   **/ls**: Liệt kê tất cả các tệp hiện có trong cuộc trò chuyện. (`/ls -l` để xem chi tiết token).
+    *   *Ví dụ:* `/drop src/legacy_code.py`
+-   **/ls**: Liệt kê tất cả các tệp hiện có trong cuộc trò chuyện.
+    *   *Ví dụ:* `/ls -l` (để xem chi tiết token).
 -   **/edit `<file_path>`**: Mở tệp được chỉ định trong trình soạn thảo của bạn để chỉnh sửa thủ công.
+    *   *Ví dụ:* `/edit Dockerfile`
 -   **/copy `<file_path>`**: Sao chép nội dung tệp vào bộ nhớ tạm của hệ thống.
+    *   *Ví dụ:* `/copy config.yaml`
 -   **/paste `<file_path>`**: Dán nội dung từ bộ nhớ tạm vào một tệp.
+    *   *Ví dụ:* `/paste config.backup.yaml`
 -   **/code `<file_path>`**: Hiển thị mã nguồn của một tệp ngay trong cuộc trò chuyện.
+    *   *Ví dụ:* `/code package.json`
 -   **/context**: Hiển thị nội dung ngữ cảnh hiện tại đang được gửi đến mô hình AI.
 -   **/copy-context**: Sao chép ngữ cảnh vào bộ nhớ tạm.
 
 **Git và Quản lý Thay đổi**
 -   **/diff**: Hiển thị các thay đổi đang chờ xử lý (chưa được commit).
 -   **/undo**: Hoàn tác lại thay đổi gần nhất đã được Aider thực hiện.
--   **/commit**: Commit các thay đổi đang chờ xử lý (ví dụ: `/commit -m "feat: Mô tả thay đổi"`).
+-   **/commit**: Commit các thay đổi đang chờ xử lý.
+    *   *Ví dụ:* `/commit -m "feat: Thêm chức năng đăng nhập"`
 -   **/git**: Hiển thị trạng thái git của các tệp trong cuộc trò chuyện.
 
 **Tương tác với AI và Mô hình**
 -   **/ask `<question>`**: Gửi một câu hỏi một lần đến mô hình mà không yêu cầu chỉnh sửa tệp.
+    *   *Ví dụ:* `/ask "Sự khác biệt giữa aiohttp và flask là gì?"`
 -   **/model `[model_name]`**: Hiển thị hoặc chuyển đổi mô hình AI đang sử dụng.
+    *   *Ví dụ:* `/model claude-3-5-sonnet`
 -   **/models**: Liệt kê tất cả các mô hình AI có sẵn.
 -   **/tokens**: Hiển thị số lượng token đã sử dụng.
 -   **/architect**: Bắt đầu một cuộc trò chuyện với vai trò kiến trúc sư hệ thống để thảo luận ở mức độ cao.
 -   **/chat-mode `[mode]`**: Chuyển đổi giữa các chế độ trò chuyện (ví dụ: `code`, `chat`).
+    *   *Ví dụ:* `/chat-mode code`
 
 **Thực thi Lệnh**
 -   **/run `<command>`**: Chạy một lệnh shell và đưa kết quả vào cuộc trò chuyện.
+    *   *Ví dụ:* `/run npm install && npm run build`
 -   **/test `<command>`**: Một alias cho `/run`, dùng để chạy các lệnh test.
+    *   *Ví dụ:* `/test pytest -k test_api`
 -   **/lint**: Chạy linter trên các tệp trong cuộc trò chuyện (nếu được cấu hình).
 
 **Quản lý Cuộc trò chuyện và Giao diện**
 -   **/clear**: Xóa toàn bộ lịch sử cuộc trò chuyện hiện tại.
 -   **/history**: Hiển thị lịch sử các tin nhắn đã gửi.
 -   **/load `<filename>`**: Tải lịch sử trò chuyện từ một tệp.
+    *   *Ví dụ:* `/load previous_session.log`
 -   **/save `<filename>`**: Lưu nội dung cuộc trò chuyện vào một tệp.
+    *   *Ví dụ:* `/save chat_history.md`
 -   **/multiline-mode**: Bật/tắt chế độ nhập nhiều dòng để gửi các đoạn code hoặc văn bản dài.
 -   **/editor**: Cấu hình trình soạn thảo mặc định để sử dụng với lệnh `/edit`.
+    *   *Ví dụ:* `/editor nvim`
 -   **/editor-model**: Cấu hình mô hình AI được sử dụng cho các chỉnh sửa trong trình soạn thảo.
+    *   *Ví dụ:* `/editor-model gpt-4o-mini`
 -   **/map**: Hiển thị bản đồ mã nguồn của dự án (yêu cầu `ctags`).
 -   **/map-refresh**: Cập nhật lại bản đồ mã nguồn.
 
