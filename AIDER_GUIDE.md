@@ -129,32 +129,48 @@ Aider sẽ đề xuất các khối code để thay đổi. Bạn sẽ có lựa
 
 ### Các lệnh trong Aider
 
-Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`). Dưới đây là danh sách đầy đủ hơn, được nhóm theo chức năng:
+Aider cung cấp một số lệnh hữu ích mà bạn có thể sử dụng ngay trong cuộc trò chuyện. Các lệnh này bắt đầu bằng dấu gạch chéo (`/`). Dưới đây là danh sách đầy đủ, được nhóm theo chức năng:
 
-**Quản lý Tệp**
--   **/add `<file_path>`**: Thêm một hoặc nhiều tệp vào cuộc trò chuyện. Bạn có thể dùng `glob pattern` (ví dụ: `src/**/*.js`).
+**Quản lý Tệp và Ngữ cảnh**
+-   **/add `<file_path>`**: Thêm một hoặc nhiều tệp vào cuộc trò chuyện. Hỗ trợ `glob pattern`.
 -   **/drop `<file_path>`**: Xóa một hoặc nhiều tệp khỏi cuộc trò chuyện.
--   **/ls**: Liệt kê tất cả các tệp hiện đang có trong cuộc trò chuyện.
-    *   `/ls -l`: Liệt kê các tệp cùng với thông tin về số lượng token.
+-   **/ls**: Liệt kê tất cả các tệp hiện có trong cuộc trò chuyện. (`/ls -l` để xem chi tiết token).
+-   **/edit `<file_path>`**: Mở tệp được chỉ định trong trình soạn thảo của bạn để chỉnh sửa thủ công.
+-   **/copy `<file_path>`**: Sao chép nội dung tệp vào bộ nhớ tạm của hệ thống.
+-   **/paste `<file_path>`**: Dán nội dung từ bộ nhớ tạm vào một tệp.
+-   **/code `<file_path>`**: Hiển thị mã nguồn của một tệp ngay trong cuộc trò chuyện.
+-   **/context**: Hiển thị nội dung ngữ cảnh hiện tại đang được gửi đến mô hình AI.
+-   **/copy-context**: Sao chép ngữ cảnh vào bộ nhớ tạm.
 
 **Git và Quản lý Thay đổi**
--   **/diff**: Hiển thị các thay đổi đang chờ xử lý (chưa được commit) trong các tệp đã thêm vào cuộc trò chuyện.
--   **/undo**: Hoàn tác lại thay đổi gần nhất đã được chấp nhận.
--   **/commit**: Commit các thay đổi đang chờ xử lý với một thông điệp commit (ví dụ: `/commit -m "feat: Mô tả thay đổi"`).
--   **/git**: Hiển thị trạng thái git của các tệp trong cuộc trò chuyện. Tương tự `/diff`.
+-   **/diff**: Hiển thị các thay đổi đang chờ xử lý (chưa được commit).
+-   **/undo**: Hoàn tác lại thay đổi gần nhất đã được Aider thực hiện.
+-   **/commit**: Commit các thay đổi đang chờ xử lý (ví dụ: `/commit -m "feat: Mô tả thay đổi"`).
+-   **/git**: Hiển thị trạng thái git của các tệp trong cuộc trò chuyện.
+
+**Tương tác với AI và Mô hình**
+-   **/ask `<question>`**: Gửi một câu hỏi một lần đến mô hình mà không yêu cầu chỉnh sửa tệp.
+-   **/model `[model_name]`**: Hiển thị hoặc chuyển đổi mô hình AI đang sử dụng.
+-   **/models**: Liệt kê tất cả các mô hình AI có sẵn.
+-   **/tokens**: Hiển thị số lượng token đã sử dụng.
+-   **/architect**: Bắt đầu một cuộc trò chuyện với vai trò kiến trúc sư hệ thống để thảo luận ở mức độ cao.
+-   **/chat-mode `[mode]`**: Chuyển đổi giữa các chế độ trò chuyện (ví dụ: `code`, `chat`).
 
 **Thực thi Lệnh**
--   **/run `<command>`**: Chạy một lệnh shell và đưa kết quả vào cuộc trò chuyện. Rất hữu ích để chạy test, linter, hoặc build.
-    *   Ví dụ: `/run pytest tests/`
-    *   Ví dụ: `/run npm run build`
--   **/test `<command>`**: Một alias (tên gọi khác) cho `/run`, được thiết kế để chạy các lệnh test một cách tường minh hơn.
+-   **/run `<command>`**: Chạy một lệnh shell và đưa kết quả vào cuộc trò chuyện.
+-   **/test `<command>`**: Một alias cho `/run`, dùng để chạy các lệnh test.
+-   **/lint**: Chạy linter trên các tệp trong cuộc trò chuyện (nếu được cấu hình).
 
-**Quản lý Cuộc trò chuyện**
+**Quản lý Cuộc trò chuyện và Giao diện**
 -   **/clear**: Xóa toàn bộ lịch sử cuộc trò chuyện hiện tại.
--   **/history**: Hiển thị lịch sử cuộc trò chuyện.
--   **/save <filename>`**: Lưu nội dung cuộc trò chuyện vào một tệp văn bản.
--   **/model [model_name]**: Hiển thị mô hình AI đang sử dụng. Nếu cung cấp `model_name`, nó sẽ chuyển sang mô hình đó.
--   **/tokens**: Hiển thị số lượng token đã sử dụng cho các tệp trong ngữ cảnh và lịch sử trò chuyện.
+-   **/history**: Hiển thị lịch sử các tin nhắn đã gửi.
+-   **/load `<filename>`**: Tải lịch sử trò chuyện từ một tệp.
+-   **/save `<filename>`**: Lưu nội dung cuộc trò chuyện vào một tệp.
+-   **/multiline-mode**: Bật/tắt chế độ nhập nhiều dòng để gửi các đoạn code hoặc văn bản dài.
+-   **/editor**: Cấu hình trình soạn thảo mặc định để sử dụng với lệnh `/edit`.
+-   **/editor-model**: Cấu hình mô hình AI được sử dụng cho các chỉnh sửa trong trình soạn thảo.
+-   **/map**: Hiển thị bản đồ mã nguồn của dự án (yêu cầu `ctags`).
+-   **/map-refresh**: Cập nhật lại bản đồ mã nguồn.
 
 **Các lệnh khác**
 -   **/help**: Hiển thị danh sách các lệnh có sẵn.
